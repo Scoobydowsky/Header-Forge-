@@ -52,11 +52,11 @@ npm run lint
 
 ## Screenshots
 
-See the capture guide in [`docs/STORE.md`](./docs/STORE.md). Place final 1280×800 PNGs in `docs/screenshots/`.
+Place store screenshots (1280×800 PNG) in `docs/screenshots/`.
 
-## Store listing
+## Privacy
 
-Publishing checklist, privacy URL setup, and copy templates: [`docs/STORE.md`](./docs/STORE.md).
+See [PRIVACY.md](./PRIVACY.md) and the hosted page [`docs/privacy.html`](./docs/privacy.html).
 
 ## Architecture
 
