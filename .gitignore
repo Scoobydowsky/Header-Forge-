@@ -9,3 +9,6 @@ dist/
 *.zip
 .env
 .env.*
+
+# Internal publishing notes (keep local only)
+docs/STORE.md
