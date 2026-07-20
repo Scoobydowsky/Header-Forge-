@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HeaderForge Options</title>
+    <link rel="stylesheet" href="../utils/shared.css" />
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar__brand">
+          <img src="../icons/icon48.png" width="28" height="28" alt="" />
+          <div>
+            <strong>HeaderForge</strong>
+            <span class="hf-muted">Options</span>
+          </div>
+        </div>
+        <nav class="sidebar__nav" aria-label="Options tabs">
+          <button class="sidebar__link is-active" type="button" data-tab="profiles">Profiles</button>
+          <button class="sidebar__link" type="button" data-tab="headers">Headers</button>
+          <button class="sidebar__link" type="button" data-tab="rules">Rules</button>
+          <button class="sidebar__link" type="button" data-tab="import">Import</button>
+          <button class="sidebar__link" type="button" data-tab="export">Export</button>
+          <button class="sidebar__link" type="button" data-tab="about">About</button>
+        </nav>
+        <div class="sidebar__foot">
+          <label class="sidebar__enable">
+            <span>Extension</span>
+            <span class="hf-switch">
+              <input id="global-enabled" type="checkbox" />
+              <span class="hf-switch__track"><span class="hf-switch__thumb"></span></span>
+            </span>
+          </label>
+          <div id="sidebar-counters" class="sidebar__counters"></div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="main__header">
+          <div>
+            <h1 id="tab-title">Profiles</h1>
+            <p id="tab-subtitle" class="hf-muted">Create and switch configuration profiles.</p>
+          </div>
+          <div class="main__actions">
+            <div class="hf-search main__search">
+              <span class="hf-search__icon" aria-hidden="true">⌕</span>
+              <input
+                id="global-search"
+                class="hf-input hf-search__input"
+                type="search"
+                placeholder="Search… (Ctrl+F)"
+                autocomplete="off"
+                spellcheck="false"
+              />
+            </div>
+            <button id="save-btn" class="hf-btn hf-btn--primary" type="button">Save</button>
+          </div>
+        </header>
+
+        <section id="panel-profiles" class="panel is-active" data-panel="profiles"></section>
+        <section id="panel-headers" class="panel" data-panel="headers" hidden></section>
+        <section id="panel-rules" class="panel" data-panel="rules" hidden></section>
+        <section id="panel-import" class="panel" data-panel="import" hidden></section>
+        <section id="panel-export" class="panel" data-panel="export" hidden></section>
+        <section id="panel-about" class="panel" data-panel="about" hidden></section>
+      </main>
+    </div>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

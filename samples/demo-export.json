@@ -1,0 +1,158 @@
+{
+  "format": "headerforge",
+  "version": 1,
+  "exportedAt": "2026-07-20T00:00:00.000Z",
+  "profiles": [
+    {
+      "id": "sample-dev",
+      "name": "Development",
+      "color": "DEV",
+      "enabled": true,
+      "createdAt": 0,
+      "updatedAt": 0,
+      "headers": [
+        {
+          "id": "h1",
+          "name": "Authorization",
+          "value": "Bearer dev-token-replace-me",
+          "operation": "SET",
+          "enabled": true
+        },
+        {
+          "id": "h2",
+          "name": "X-Debug",
+          "value": "true",
+          "operation": "SET",
+          "enabled": true
+        },
+        {
+          "id": "h3",
+          "name": "Accept",
+          "value": "application/json",
+          "operation": "SET",
+          "enabled": true
+        }
+      ],
+      "rules": [
+        {
+          "id": "r1",
+          "pattern": "localhost",
+          "enabled": true
+        },
+        {
+          "id": "r2",
+          "pattern": "127.0.0.1",
+          "enabled": true
+        },
+        {
+          "id": "r3",
+          "pattern": "*.local.dev",
+          "enabled": true
+        }
+      ]
+    },
+    {
+      "id": "sample-qa",
+      "name": "QA",
+      "color": "TEST",
+      "enabled": true,
+      "createdAt": 0,
+      "updatedAt": 0,
+      "headers": [
+        {
+          "id": "h4",
+          "name": "Authorization",
+          "value": "Bearer qa-token-replace-me",
+          "operation": "SET",
+          "enabled": true
+        },
+        {
+          "id": "h5",
+          "name": "X-Environment",
+          "value": "qa",
+          "operation": "SET",
+          "enabled": true
+        }
+      ],
+      "rules": [
+        {
+          "id": "r4",
+          "pattern": "*.qa.example.com",
+          "enabled": true
+        },
+        {
+          "id": "r5",
+          "pattern": "api.qa.example.com",
+          "enabled": true
+        }
+      ]
+    },
+    {
+      "id": "sample-prod",
+      "name": "Production",
+      "color": "PROD",
+      "enabled": true,
+      "createdAt": 0,
+      "updatedAt": 0,
+      "headers": [
+        {
+          "id": "h6",
+          "name": "X-Request-Source",
+          "value": "headerforge",
+          "operation": "SET",
+          "enabled": false
+        }
+      ],
+      "rules": [
+        {
+          "id": "r6",
+          "pattern": "api.example.com",
+          "enabled": true
+        }
+      ]
+    },
+    {
+      "id": "sample-local",
+      "name": "Localhost",
+      "color": "LOCAL",
+      "enabled": true,
+      "createdAt": 0,
+      "updatedAt": 0,
+      "headers": [
+        {
+          "id": "h7",
+          "name": "Origin",
+          "value": "http://localhost:3000",
+          "operation": "SET",
+          "enabled": true
+        },
+        {
+          "id": "h8",
+          "name": "Referer",
+          "value": "http://localhost:3000/",
+          "operation": "SET",
+          "enabled": true
+        },
+        {
+          "id": "h9",
+          "name": "User-Agent",
+          "value": "HeaderForge/1.0 (local-dev)",
+          "operation": "SET",
+          "enabled": true
+        }
+      ],
+      "rules": [
+        {
+          "id": "r7",
+          "pattern": "localhost",
+          "enabled": true
+        },
+        {
+          "id": "r8",
+          "pattern": "127.0.0.1",
+          "enabled": true
+        }
+      ]
+    }
+  ]
+}

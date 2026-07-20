@@ -1,0 +1,19 @@
+{
+  "name": "headerforge",
+  "version": "1.0.2",
+  "private": true,
+  "description": "Open-source, privacy-first HTTP header manager for Chrome and Edge (Manifest V3).",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "zip": "rm -f headerforge.zip && zip -r headerforge.zip manifest.json background popup options storage rules utils samples icons PRIVACY.md LICENSE README.md -x '*.DS_Store'"
+  },
+  "devDependencies": {
+    "eslint": "^9.18.0",
+    "globals": "^15.14.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

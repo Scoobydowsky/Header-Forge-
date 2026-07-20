@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HeaderForge</title>
+    <link rel="stylesheet" href="../utils/shared.css" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="popup">
+      <header class="popup__header">
+        <div class="popup__brand">
+          <img src="../icons/icon32.png" width="20" height="20" alt="" />
+          <span>HeaderForge</span>
+        </div>
+        <label class="hf-switch" title="Enable / disable">
+          <span class="hf-sr-only">Enable HeaderForge</span>
+          <input id="toggle-enabled" type="checkbox" />
+          <span class="hf-switch__track"><span class="hf-switch__thumb"></span></span>
+        </label>
+      </header>
+
+      <section class="popup__active" aria-label="Active profile">
+        <div class="popup__active-meta">
+          <span class="popup__active-label">Active profile</span>
+          <div class="popup__active-row">
+            <strong id="active-name">—</strong>
+            <span id="active-color" class="hf-label" hidden></span>
+          </div>
+        </div>
+        <div id="counters" class="popup__counters"></div>
+      </section>
+
+      <div id="site-status" class="popup__site" hidden></div>
+
+      <label class="popup__scope">
+        <span>
+          <strong>All sites</strong>
+          <span class="hf-muted">Apply headers everywhere (no domain list)</span>
+        </span>
+        <span class="hf-switch">
+          <input id="toggle-all-sites" type="checkbox" />
+          <span class="hf-switch__track"><span class="hf-switch__thumb"></span></span>
+        </span>
+      </label>
+
+      <nav class="popup__tabs" aria-label="Popup views">
+        <button class="popup__tab is-active" type="button" data-view="headers">Headers</button>
+        <button class="popup__tab" type="button" data-view="profiles">Profiles</button>
+      </nav>
+
+      <section id="view-headers" class="popup__view is-active" aria-label="Live headers">
+        <div class="popup__section-head">
+          <h2>Live headers</h2>
+          <button id="open-headers" class="hf-btn hf-btn--ghost" type="button">Full editor</button>
+        </div>
+        <div id="live-headers" class="popup__headers"></div>
+        <form id="add-header-form" class="popup__add" autocomplete="off">
+          <input
+            id="quick-name"
+            class="hf-input hf-mono"
+            type="text"
+            list="hf-header-names"
+            placeholder="Header"
+            spellcheck="false"
+            autocomplete="off"
+            required
+          />
+          <input
+            id="quick-value"
+            class="hf-input hf-mono"
+            type="text"
+            placeholder="Value"
+            spellcheck="false"
+          />
+          <button class="hf-btn hf-btn--primary" type="submit" title="Add header">+</button>
+        </form>
+      </section>
+
+      <section id="view-profiles" class="popup__view" aria-label="Profiles" hidden>
+        <div class="popup__search hf-search">
+          <span class="hf-search__icon" aria-hidden="true">⌕</span>
+          <input
+            id="search"
+            class="hf-input hf-search__input"
+            type="search"
+            placeholder="Search profiles, headers, domains…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+        <div class="popup__section-head">
+          <h2>Quick switch</h2>
+          <button id="open-options" class="hf-btn hf-btn--ghost" type="button">Options</button>
+        </div>
+        <div id="recent" class="popup__recent"></div>
+        <div id="profile-list" class="popup__list" role="listbox" aria-label="Profiles"></div>
+      </section>
+
+      <footer class="popup__footer">
+        <span id="status-text" class="hf-muted">Ready</span>
+        <button id="manage" class="hf-btn hf-btn--primary" type="button">Manage</button>
+      </footer>
+    </div>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

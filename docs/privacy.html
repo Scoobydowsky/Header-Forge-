@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HeaderForge Privacy Policy</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0d1117;
+        --fg: #e6edf3;
+        --muted: #8b949e;
+        --accent: #3d9a8b;
+        --card: #161b22;
+        --border: #30363d;
+        font-family: "Segoe UI", "SF Pro Text", Helvetica, sans-serif;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f6f8fa;
+          --fg: #1f2328;
+          --muted: #656d76;
+          --card: #ffffff;
+          --border: #d0d7de;
+        }
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        line-height: 1.55;
+      }
+      main {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 48px 20px 80px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 2rem;
+        letter-spacing: -0.02em;
+      }
+      h2 {
+        margin: 32px 0 10px;
+        font-size: 1.15rem;
+      }
+      p,
+      li {
+        color: var(--muted);
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .card {
+        margin-top: 20px;
+        padding: 16px 18px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--card);
+      }
+      .card strong {
+        color: var(--fg);
+      }
+      ul {
+        padding-left: 1.2rem;
+      }
+      a {
+        color: var(--accent);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 10px 8px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+      th {
+        color: var(--muted);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      td {
+        color: var(--fg);
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>HeaderForge Privacy Policy</h1>
+      <p class="meta">Effective date: 2026-07-20 · Product: HeaderForge browser extension</p>
+
+      <div class="card">
+        <p>
+          <strong>Summary:</strong> HeaderForge is offline-first. It does not collect,
+          transmit, sell, or share your data.
+        </p>
+        <ul>
+          <li>Zero telemetry</li>
+          <li>Zero analytics</li>
+          <li>No external API calls for extension features</li>
+          <li>No accounts</li>
+          <li>No cloud sync in v1</li>
+        </ul>
+      </div>
+
+      <h2>What we store</h2>
+      <p>
+        Configuration is stored only in <code>chrome.storage.local</code> on your device:
+      </p>
+      <ul>
+        <li>Profiles</li>
+        <li>Header definitions (names, values, operations)</li>
+        <li>Domain rules</li>
+        <li>Enable/disable state and “All sites” preference</li>
+        <li>Automatic local backup snapshot</li>
+      </ul>
+
+      <h2>What we do not do</h2>
+      <ul>
+        <li>Send browsing history, URLs, or headers to any server</li>
+        <li>Use Google Analytics, Sentry, or similar tools</li>
+        <li>Phone home for license checks or usage stats</li>
+        <li>Store data outside <code>chrome.storage.local</code></li>
+        <li>Require an account</li>
+      </ul>
+
+      <h2>Permissions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Permission</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>storage</code></td>
+            <td>Save profiles locally</td>
+          </tr>
+          <tr>
+            <td><code>declarativeNetRequest</code> / host access</td>
+            <td>Modify request headers</td>
+          </tr>
+          <tr>
+            <td><code>tabs</code></td>
+            <td>Open options and support toolbar workflows</td>
+          </tr>
+          <tr>
+            <td><code>http://*/*</code>, <code>https://*/*</code></td>
+            <td>
+              Required so header modifications can run on websites. No browsing data
+              leaves your device.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Domain marks</h2>
+      <p>
+        Favicon-like marks next to domain rules are generated locally (SVG data URIs).
+        They are not fetched from the network.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        If a future version adds optional cloud sync, it will be <strong>opt-in</strong>,
+        documented, and never enabled by default.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        For privacy questions or reports, open an issue in the
+        <a id="issues-link" href="https://github.com/">HeaderForge GitHub repository</a>.
+      </p>
+    </main>
+    <script>
+      (function () {
+        var host = location.hostname;
+        var match = host.match(/^([^.]+)\.github\.io$/i);
+        if (!match) {
+          return;
+        }
+        var user = match[1];
+        var parts = location.pathname.split('/').filter(Boolean);
+        var repo = parts[0] || 'HeaderForge';
+        var link = document.getElementById('issues-link');
+        if (!link) {
+          return;
+        }
+        link.href = 'https://github.com/' + user + '/' + repo + '/issues';
+        link.textContent = user + '/' + repo + ' Issues';
+      })();
+    </script>
+  </body>
+</html>

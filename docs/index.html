@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HeaderForge</title>
+    <meta
+      name="description"
+      content="Open-source, privacy-first HTTP header manager for Chrome and Edge."
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0d1117;
+        --fg: #e6edf3;
+        --muted: #8b949e;
+        --accent: #3d9a8b;
+        --card: #161b22;
+        --border: #30363d;
+        font-family: "Segoe UI", "SF Pro Text", Helvetica, sans-serif;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f6f8fa;
+          --fg: #1f2328;
+          --muted: #656d76;
+          --card: #ffffff;
+          --border: #d0d7de;
+        }
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: var(--bg);
+        color: var(--fg);
+      }
+      main {
+        width: min(560px, calc(100% - 40px));
+        padding: 28px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--card);
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 1.75rem;
+        letter-spacing: -0.02em;
+      }
+      p {
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 0 14px;
+        border-radius: 8px;
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      a.secondary {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--fg);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>HeaderForge</h1>
+      <p>
+        Open-source, privacy-first HTTP header manager for Chrome and Edge (Manifest V3).
+        Zero telemetry. Everything stays on your device.
+      </p>
+      <p style="color: var(--muted); font-size: 0.9rem">
+        Created with assistance from the Cursor AI agent (Composer).
+      </p>
+      <div class="links">
+        <a id="repo-link" class="secondary" href="https://github.com/Scoobydowsky/Header-Forge-">GitHub</a>
+        <a href="./privacy.html">Privacy Policy</a>
+      </div>
+    </main>
+    <script>
+      (function () {
+        var host = location.hostname;
+        var match = host.match(/^([^.]+)\.github\.io$/i);
+        if (!match) {
+          return;
+        }
+        var user = match[1];
+        var parts = location.pathname.split('/').filter(Boolean);
+        var repo = parts[0] || 'HeaderForge';
+        var link = document.getElementById('repo-link');
+        if (link) {
+          link.href = 'https://github.com/' + user + '/' + repo;
+          link.textContent = 'GitHub';
+        }
+      })();
+    </script>
+  </body>
+</html>
