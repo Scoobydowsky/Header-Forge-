@@ -21,9 +21,9 @@
         </label>
       </header>
 
-      <section class="popup__active" aria-label="Active profile">
+      <section class="popup__active" aria-label="Workspace">
         <div class="popup__active-meta">
-          <span class="popup__active-label">Active profile</span>
+          <span class="popup__active-label" id="active-label">Workspace</span>
           <div class="popup__active-row">
             <strong id="active-name">—</strong>
             <span id="active-color" class="hf-label" hidden></span>
@@ -91,9 +91,12 @@
           />
         </div>
         <div class="popup__section-head">
-          <h2>Quick switch</h2>
+          <h2>Profiles (optional)</h2>
           <button id="open-options" class="hf-btn hf-btn--ghost" type="button">Options</button>
         </div>
+        <p class="popup__hint hf-muted">
+          Optional. Add profiles only if you need separate environments.
+        </p>
         <div id="recent" class="popup__recent"></div>
         <div id="profile-list" class="popup__list" role="listbox" aria-label="Profiles"></div>
       </section>

@@ -4,7 +4,6 @@
  */
 
 import { createId } from '../utils/id.js';
-import { createSampleProfiles } from '../samples/sample-data.js';
 import {
   COLOR_LABELS,
   HEADER_OPERATIONS,
@@ -15,7 +14,7 @@ import {
 } from '../utils/validate.js';
 
 /** Storage schema version. */
-export const STORAGE_VERSION = 1;
+export const STORAGE_VERSION = 2;
 
 /** Primary storage key. */
 export const STORAGE_KEY = 'headerforge';
@@ -51,21 +50,21 @@ export const DEFAULT_EXCLUDED_DOMAINS = Object.freeze([
  */
 
 /**
- * Create an empty application state with sample profiles.
+ * Create a blank application state — one empty Default workspace, no sample data.
  *
  * @returns {AppState}
  */
 export function createDefaultState() {
-  const profiles = createSampleProfiles();
+  const profile = createEmptyProfile('Default', '');
 
   return {
     version: STORAGE_VERSION,
     enabled: true,
     applyToAllSites: true,
     excludedDomains: [...DEFAULT_EXCLUDED_DOMAINS],
-    activeProfileId: profiles[0]?.id ?? null,
-    recentProfileIds: profiles.slice(0, 3).map((profile) => profile.id),
-    profiles,
+    activeProfileId: profile.id,
+    recentProfileIds: [profile.id],
+    profiles: [profile],
     backup: null,
     lastBackupAt: null,
     onboarded: false,
@@ -75,11 +74,11 @@ export function createDefaultState() {
 /**
  * Create a blank profile.
  *
- * @param {string} [name='New Profile']
+ * @param {string} [name='Default']
  * @param {import('../utils/validate.js').ColorLabel} [color='']
  * @returns {import('../utils/validate.js').Profile}
  */
-export function createEmptyProfile(name = 'New Profile', color = '') {
+export function createEmptyProfile(name = 'Default', color = '') {
   const now = Date.now();
 
   return {
@@ -135,6 +134,13 @@ export async function loadState() {
     const defaults = createDefaultState();
     await saveState(defaults);
     return defaults;
+  }
+
+  // v1 shipped with demo profiles — reset to a clean empty Default workspace.
+  if (typeof stored.version !== 'number' || stored.version < STORAGE_VERSION) {
+    const fresh = createDefaultState();
+    await saveState(fresh);
+    return fresh;
   }
 
   return normalizeState(stored);

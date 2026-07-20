@@ -155,9 +155,14 @@ function renderActive() {
   const toggle = /** @type {HTMLInputElement} */ ($('#toggle-enabled'));
   const root = /** @type {HTMLElement} */ ($('.popup'));
 
-  nameEl.textContent = profile?.name ?? 'No profile';
+  nameEl.textContent = profile?.name ?? 'Default';
   toggle.checked = state.enabled;
   root.classList.toggle('is-disabled', !state.enabled);
+
+  const labelEl = /** @type {HTMLElement | null} */ ($('#active-label'));
+  if (labelEl) {
+    labelEl.textContent = state.profiles.length > 1 ? 'Active profile' : 'Workspace';
+  }
 
   if (profile?.color) {
     colorEl.hidden = false;
@@ -660,6 +665,12 @@ function renderRecent() {
   }
 
   const host = /** @type {HTMLElement} */ ($('#recent'));
+  // Profiles are optional — hide quick chips when there's only one workspace.
+  if (state.profiles.length <= 1) {
+    host.replaceChildren();
+    return;
+  }
+
   const recent = state.recentProfileIds
     .map((id) => state?.profiles.find((profile) => profile.id === id))
     .filter(Boolean)

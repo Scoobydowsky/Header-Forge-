@@ -139,6 +139,12 @@ body {
   letter-spacing: 0.05em;
 }
 
+.popup__hint {
+  margin: 0 0 8px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 .popup__recent {
   display: flex;
   flex-wrap: wrap;

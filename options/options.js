@@ -5,7 +5,6 @@
 import { $, el } from '../utils/dom.js';
 import { showToast } from '../utils/toast.js';
 import { createId } from '../utils/id.js';
-import { HEADER_PRESETS } from '../utils/presets.js';
 import { domainFaviconDataUri } from '../utils/favicon.js';
 import {
   COLOR_LABELS,
@@ -43,7 +42,7 @@ let state = null;
 let selectedProfileId = null;
 
 /** @type {'profiles' | 'headers' | 'rules' | 'import' | 'export' | 'about'} */
-let activeTab = 'profiles';
+let activeTab = 'headers';
 
 /** @type {string} */
 let searchQuery = '';
@@ -51,15 +50,15 @@ let searchQuery = '';
 const TAB_COPY = {
   profiles: {
     title: 'Profiles',
-    subtitle: 'Create, duplicate, and activate configuration profiles.',
+    subtitle: 'Optional. Use separate profiles only if you need DEV / QA / PROD setups.',
   },
   headers: {
     title: 'Headers',
-    subtitle: 'Add, edit, disable, or remove request headers for the selected profile.',
+    subtitle: 'Add and edit request headers for the current workspace.',
   },
   rules: {
     title: 'Rules',
-    subtitle: 'Limit header modifications to matching domains (wildcards supported).',
+    subtitle: 'Optional domain limits. Ignored while All sites mode is on.',
   },
   import: {
     title: 'Import',
@@ -67,7 +66,7 @@ const TAB_COPY = {
   },
   export: {
     title: 'Export',
-    subtitle: 'Download your profiles as JSON for backup or sharing.',
+    subtitle: 'Download your configuration as JSON for backup or sharing.',
   },
   about: {
     title: 'About',
@@ -274,10 +273,17 @@ function renderProfilesPanel() {
   panel.replaceChildren(
     el('div', { className: 'card' }, [
       el('div', { className: 'card__head' }, [
-        el('h2', { text: 'All profiles' }),
+        el('h2', { text: 'Profiles (optional)' }),
         el('span', { className: 'hf-muted', text: `${state.profiles.length} total` }),
       ]),
-      el('div', { className: 'card__body' }, [toolbar, grid]),
+      el('div', { className: 'card__body' }, [
+        el('p', {
+          className: 'hf-muted',
+          text: 'You can work with a single Default workspace. Create extra profiles only when you need separate environments.',
+        }),
+        toolbar,
+        grid,
+      ]),
     ]),
   );
 
@@ -372,20 +378,6 @@ function renderHeadersPanel() {
     );
   });
 
-  const presetGrid = el('div', { className: 'preset-grid' });
-  for (const preset of HEADER_PRESETS) {
-    const btn = el('button', {
-      className: 'preset-card',
-      type: 'button',
-      'data-preset': preset.id,
-    });
-    btn.append(
-      el('strong', { text: preset.name }),
-      el('span', { text: preset.description }),
-    );
-    presetGrid.append(btn);
-  }
-
   const table = el('table', { className: 'table' });
   table.append(
     el('thead', {}, [
@@ -405,7 +397,7 @@ function renderHeadersPanel() {
     tbody.append(
       el('tr', {}, [
         el('td', { colspan: '5' }, [
-          el('div', { className: 'hf-empty', text: 'No headers yet. Add one or apply a preset.' }),
+          el('div', { className: 'hf-empty', text: 'No headers yet. Add one below.' }),
         ]),
       ]),
     );
@@ -525,20 +517,12 @@ function renderHeadersPanel() {
         }),
       ]),
       el('div', { className: 'card__body' }, [
-        el('h3', { text: 'Presets', style: 'margin:0 0 8px;font-size:13px;' }),
-        presetGrid,
         addRow,
         el('div', { style: 'height:16px' }),
         table,
       ]),
     ]),
   );
-
-  panel.querySelectorAll('[data-preset]').forEach((node) => {
-    node.addEventListener('click', () => {
-      applyPreset(/** @type {HTMLElement} */ (node).dataset.preset ?? '').catch(handleError);
-    });
-  });
 
   $('#btn-add-header')?.addEventListener('click', () => addHeader().catch(handleError));
 
@@ -1019,7 +1003,7 @@ async function createProfile() {
     return;
   }
 
-  const profile = createEmptyProfile('New Profile', 'DEV');
+  const profile = createEmptyProfile('Profile', '');
   selectedProfileId = profile.id;
   await commit({
     ...state,
@@ -1252,40 +1236,6 @@ async function deleteHeader(headerId) {
   }
   await commit(next);
   showToast('Header deleted');
-}
-
-/**
- * @param {string} presetId
- * @returns {Promise<void>}
- */
-async function applyPreset(presetId) {
-  const profile = selectedProfile();
-  if (!profile) {
-    return;
-  }
-
-  const preset = HEADER_PRESETS.find((item) => item.id === presetId);
-  if (!preset) {
-    return;
-  }
-
-  const headers = preset.headers.map((header) => ({
-    id: createId(),
-    name: header.name,
-    value: header.value,
-    operation: header.operation,
-    enabled: true,
-  }));
-
-  const next = mapProfile(profile.id, (item) => ({
-    ...item,
-    headers: [...item.headers, ...headers],
-  }));
-  if (!next) {
-    return;
-  }
-  await commit(next);
-  showToast(`Applied preset: ${preset.name}`);
 }
 
 /**

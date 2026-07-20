@@ -12,13 +12,12 @@ This project was created with assistance from the **Cursor AI agent** (Composer)
 
 ## Features
 
-- **Profiles** — Production, Development, QA, Localhost, or your own
+- **Profiles** — optional environments (DEV / QA / PROD) when you need them
 - **Headers** — ADD / SET / REMOVE with one-click disable
-- **Domain rules** — `localhost`, `api.example.com`, `*.example.com`
-- **Presets** — JWT, Bearer, OAuth, CORS Testing, JSON API, XML API
+- **Domain rules** — optional; or use All sites mode
 - **Import / Export** — portable JSON
 - **Automatic local backup** on every save
-- **Popup** — active profile, enable toggle, quick switch, search, recent profiles
+- **Popup** — live header edits, enable toggle, optional profile switch
 - **Options** — Profiles · Headers · Rules · Import · Export · About
 - **Dark mode** — follows `prefers-color-scheme`
 - **Color labels** — DEV / TEST / PROD / LOCAL
@@ -104,10 +103,12 @@ See [PRIVACY.md](./PRIVACY.md) and [`docs/privacy.html`](./docs/privacy.html).
 
 ## Sample data
 
-- Runtime samples: `samples/sample-data.js` (seeded on first launch)
-- Static export example: `samples/demo-export.json`
+Optional fixtures for manual testing (not loaded on install):
 
-Import the demo file from **Options → Import** to try a clean fixture set.
+- `samples/sample-data.js`
+- `samples/demo-export.json`
+
+Import the demo file from **Options → Import** only if you want example profiles.
 
 ## FAQ
 
